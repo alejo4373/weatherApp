@@ -10,8 +10,9 @@ import keys from './keys'
 
 class App extends Component {
   state = {
+    neighborhood: 'Long Island City',
     weather: null,
-    scale: 'f',
+    scale: '℉',
   }
 
   getUserLocation = () => {
@@ -45,8 +46,15 @@ class App extends Component {
   }
 
   handleToggle = (e) => {
+    console.log(e.target.checked)
+    let newScale;
+    if (e.target.checked) {
+      newScale = '℃'
+    } else {
+      newScale = '℉'
+    }
     this.setState({
-      scale: e.target.value
+      scale: newScale
     })
   }
 
@@ -55,14 +63,17 @@ class App extends Component {
   }
 
   render() {
-    const { scale, weather } = this.state
+    const { scale, weather, neighborhood } = this.state
     if (weather) {
       return (
         <div className="App">
-          <CurrentWeather weather={weather.periods[0]} scale={scale} />
+          <CurrentWeather weather={weather.periods[0]} neighborhood={neighborhood} scale={scale} />
+          <hr/>
+          <div>
+            <label>℃ <input type='checkbox' onChange={this.handleToggle} value={true} checked={scale === '℃'} /></label>
+          </div>
+          <hr/>
           <WeekWeatherList weatherDays={weather.periods} scale={scale} />
-          <label>F: <input type='radio' name='scale' onInput={this.handleToggle} value={'f'} checked={scale === 'f' ? true : false } /></label>
-          <label>C: <input type='radio' name='scale' onInput={this.handleToggle} value={'c'} checked={scale === 'c' ? true : false } /></label>
         </div>
       );
     } else {

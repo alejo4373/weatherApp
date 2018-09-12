@@ -5,14 +5,15 @@ class WeekWeatherList extends Component {
   render() {
     const { weatherDays, scale } = this.props;
     return (
-      <div >
+      <div className='day-list'>
+        <h3> Week </h3>
         <table>{weatherDays.map((day, index) => {
           let maxTemp = day.maxTempF;
           let minTemp = day.minTempF;
           let date = new Date(day.dateTimeISO)
           let dayOfWeekLong = date.toLocaleDateString('en-US', { weekday: 'long' });
 
-          if (scale !== 'c') {
+          if (scale === '℃') {
             maxTemp = day.maxTempC;
             minTemp = day.minTempC;
           }
@@ -23,7 +24,7 @@ class WeekWeatherList extends Component {
                 <td>{dayOfWeekLong}</td>
                 <td><img src={`icons/${day.icon}`} alt={day.icon} /></td>
                 <td></td>
-                <td>{maxTemp}</td>
+                <td className='max-temp'>{maxTemp}</td>
                 <td>{minTemp}</td>
               </tr>
             )

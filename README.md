@@ -1,3 +1,3 @@
 # weatherApp
 
-`git clone git@github.com:alejo4373/weatherApp.git && cd weatherApp && npm start`
+`git clone git@github.com:alejo4373/weatherApp.git && cd weatherApp && npm install && npm start`
