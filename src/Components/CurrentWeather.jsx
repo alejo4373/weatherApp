@@ -4,6 +4,8 @@ class CurrentWeather extends Component {
   render() {
     let location = 'Long Island City';
     const { weather, scale } = this.props;
+    let temp = scale === 'f' ? weather.avgTempF : weather.avgTempC
+    let feelsLike = scale === 'f' ? weather.avgFeelslikeF : weather.avgFeelslikeC
     return (
       <div>
         <h1>{location}</h1>
@@ -11,14 +13,14 @@ class CurrentWeather extends Component {
           <img src={`/icons/${weather.icon}`} />
         </div>
         <div>
-          <h2 >{weather.avgTempF} <span>{scale.toUpperCase()}</span></h2>
+          <h2 >{temp} <span>{scale.toUpperCase()}</span></h2>
         </div>
         <div>
           <p><label>Sunrise:{' '} <span>{new Date(weather.sunriseISO).toLocaleTimeString()}</span></label></p>
           <p><label>Sunset:{' '} <span>{new Date(weather.sunsetISO).toLocaleTimeString()}</span></label></p>
           <p><label>Humidity:{' '} <span>{weather.humidity}%</span></label></p>
           <p><label>Wind:{' '} <span>{weather.windDir} {weather.windSpeedMPH} mph</span></label></p>
-          <p><label>Feels Like:{' '} <span>{weather.avgFeelslikeF} {scale.toUpperCase()}</span></label></p>
+          <p><label>Feels Like:{' '} <span>{feelsLike} {scale.toUpperCase()}</span></label></p>
         </div>
       </div>
     );

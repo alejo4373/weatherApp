@@ -44,6 +44,12 @@ class App extends Component {
 
   }
 
+  handleToggle = (e) => {
+    this.setState({
+      scale: e.target.value
+    })
+  }
+
   componentDidMount() {
     this.getUserLocation();
   }
@@ -55,6 +61,8 @@ class App extends Component {
         <div className="App">
           <CurrentWeather weather={weather.periods[0]} scale={scale} />
           <WeekWeatherList weatherDays={weather.periods} scale={scale} />
+          <label>F: <input type='radio' name='scale' onInput={this.handleToggle} value={'f'} checked={scale === 'f' ? true : false } /></label>
+          <label>C: <input type='radio' name='scale' onInput={this.handleToggle} value={'c'} checked={scale === 'c' ? true : false } /></label>
         </div>
       );
     } else {
